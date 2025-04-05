@@ -5,6 +5,8 @@ import Search from "./pages/Search";
 import { Navbar } from "./components";
 import styles from "./style";
 import { Toaster } from "react-hot-toast";
+import Idea from "./idea/page";
+import AddNew from "./addNew/page";
 
 
 const App = () => (
@@ -22,6 +24,8 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/idea" element={<Idea />} />
+          <Route path="/addNew" element={<AddNew />} />
         </Routes>
       </div>
       </div>

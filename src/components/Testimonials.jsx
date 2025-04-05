@@ -45,7 +45,7 @@ const UserStories = () => (
         />
       ))}
       
-      {/* Stats card */}
+      {/* Stats card
       <div className="flex flex-col p-8 rounded-2xl bg-glass-gradient backdrop-blur-sm border border-white/10 hover:border-accent/30 transition-all w-full max-w-[400px]">
         <div className="flex items-center mb-6">
           <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center mr-4">
@@ -69,7 +69,7 @@ const UserStories = () => (
             <p className="text-white text-2xl font-medium">12 hours/week</p>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   </section>
 );

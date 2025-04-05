@@ -6,9 +6,6 @@ import {
   instagram,
   linkedin,
   twitter,
-  airbnb,
-  binance,
-  coinbase,
   dropbox,
   send,
   shield,
@@ -38,51 +35,46 @@ export const features = [
   {
     id: "feature-1",
     icon: star,
-    title: "Rewards",
+    title: "Multi-Source Synthesis",
     content:
-      "The best credit cards offer some tantalizing combinations of promotions and prizes",
+      "Get answers that combine insights from all your uploaded materials - textbooks, notes, and slides in one comprehensive response",
   },
   {
     id: "feature-2",
     icon: shield,
-    title: "100% Secured",
+    title: "Source-Attributed Answers",
     content:
-      "We take proactive steps make sure your information and transactions are secure.",
+      "Every answer includes references to the original documents, maintaining academic integrity and credibility",
   },
   {
     id: "feature-3",
     icon: send,
-    title: "Balance Transfer",
+    title: "Instant Knowledge Extraction",
     content:
-      "A balance transfer credit card can save you a lot of money in interest charges.",
+      "Ask complex questions and receive accurate answers in seconds, saving hours of manual research",
   },
 ];
 
-export const feedback = [
+export const testimonials = [
   {
-    id: "feedback-1",
+    id: "testimonial-1",
     content:
-      "Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.",
-    name: "Herman Jensen",
-    title: "Founder & Leader",
+      "This platform reduced my literature review time by 80%. I can now focus on analysis rather than searching.",
+    name: "Dr. Sarah Chen",
+    title: "Research Professor, MIT",
+    role: "Biomedical Research",
     img: people01,
   },
   {
-    id: "feedback-2",
+    id: "testimonial-2",
     content:
-      "Money makes your life easier. If you're lucky to have it, you're lucky.",
-    name: "Steve Mark",
-    title: "Founder & Leader",
+      "As a PhD student, the cross-document analysis feature has been invaluable for my dissertation work.",
+    name: "James Rodriguez",
+    title: "Doctoral Candidate",
+    role: "Machine Learning",
     img: people02,
   },
-  {
-    id: "feedback-3",
-    content:
-      "It is usually people in the money business, finance, and international trade that are really rich.",
-    name: "Kenn Gallagher",
-    title: "Founder & Leader",
-    img: people03,
-  },
+  // Add more as needed
 ];
 
 export const stats = [
@@ -189,24 +181,5 @@ export const socialMedia = [
     id: "social-media-4",
     icon: linkedin,
     link: "https://www.linkedin.com/",
-  },
-];
-
-export const clients = [
-  {
-    id: "client-1",
-    logo: airbnb,
-  },
-  {
-    id: "client-2",
-    logo: binance,
-  },
-  {
-    id: "client-3",
-    logo: coinbase,
-  },
-  {
-    id: "client-4",
-    logo: dropbox,
   },
 ];

@@ -1,155 +1,172 @@
-// import styles from "../style";
-// import { discount, robot } from "../assets";
-// import GetStarted from "./GetStarted";
-
-// const Hero = () => {
-//   return (
-//     <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY}`}>
-//       <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
-//         <div className="flex flex-row items-center py-[6px] px-4 bg-discount-gradient rounded-[10px] mb-2">
-//           {/* <img src={discount} alt="discount" className="w-[32px] h-[32px]" /> */}
-//           <p className={`${styles.paragraph} ml-2`}>
-//             <span className="text-white">20%</span> Discount For{" "}
-//             <span className="text-white">1 Month</span> Account
-//           </p>
-//         </div>
-
-//         <div className="flex flex-row justify-between items-center w-full">
-//           <h1 className="flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100.8px] leading-[75px]">
-//             The Next <br className="sm:block hidden" />{" "}
-//             <span className="text-gradient">Generation</span>{" "}
-//           </h1>
-//           <div className="ss:flex hidden md:mr-4 mr-0">
-//             <GetStarted />
-//           </div>
-//         </div>
-
-//         <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[100.8px] leading-[75px] w-full">
-//           Payment Method.
-//         </h1>
-//         <p className={`${styles.paragraph} max-w-[470px] mt-5`}>
-//           Our team of experts uses a methodology to identify the credit cards
-//           most likely to fit your needs. We examine annual percentage rates,
-//           annual fees.
-//         </p>
-//       </div>
-
-//       <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
-//         {/* <img src={robot} alt="billing" className="w-[100%] h-[100%] relative z-[5]" /> */}
-
-//         {/* gradient start */}
-//         <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient" />
-//         <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
-//         <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" />
-//         {/* gradient end */}
-//       </div>
-
-//       <div className={`ss:hidden ${styles.flexCenter}`}>
-//         <GetStarted />
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default Hero;
-
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Center } from '@react-three/drei';
-import { Suspense } from 'react';
 import styles from "../style";
-import GetStarted from "./GetStarted";
-import { Model as Book3D } from "../components/Book3D"; 
+import { BookIcon } from "lucide-react";
 
+// Book Cover Subcomponents
+export const BookHeader = ({ children }) => (
+  <div className="flex gap-2">{children}</div>
+);
+
+export const BookTitle = ({ children }) => (
+  <h2 className="font-bold mt-3 mb-1 text-white text-xl">{children}</h2>
+);
+
+export const BookDescription = ({ children }) => (
+  <p className="text-sm text-white/80">{children}</p>
+);
+
+// ModernBookCover Component
+export const ModernBookCover = ({
+  size = "md",
+  color = "neutral",
+  className = "",
+  children,
+}) => {
+  const sizeMap = {
+    sm: { width: "200px", height: "300px", spine: "170px" },
+    md: { width: "240px", height: "360px", spine: "210px" },
+    lg: { width: "280px", height: "420px", spine: "250px" },
+  };
+
+  const gradient = {
+    neutral: { from: "from-neutral-900", to: "to-neutral-700" },
+    amber: { from: "from-amber-900", to: "to-amber-700" },
+    blue: { from: "from-blue-900", to: "to-blue-700" },
+  }[color];
+
+  return (
+    <div className={`group [perspective:1000px] ${className}`}>
+      <div
+        className="relative h-full [transform-style:preserve-3d] transition-transform duration-700 ease-out group-hover:[transform:rotateY(-25deg)]"
+        style={{ width: sizeMap[size].width }}
+      >
+        {/* Front Cover */}
+        <div
+          className={`absolute inset-0 flex flex-col justify-end p-6 bg-gradient-to-tr ${gradient.from} ${gradient.to} rounded-lg shadow-xl`}
+          style={{
+            transform: "translateZ(30px)",
+            height: sizeMap[size].height,
+          }}
+        >
+          {children}
+        </div>
+
+        {/* Spine */}
+        <div
+          className="absolute left-full top-2 bottom-2 w-8 bg-gradient-to-r from-neutral-800 to-neutral-700"
+          style={{
+            transform: "rotateY(90deg) translateX(10px)",
+            transformOrigin: "left center",
+          }}
+        />
+
+        {/* Back Cover */}
+        <div
+          className={`absolute inset-0 bg-gradient-to-tr ${gradient.from} ${gradient.to} rounded-lg`}
+          style={{
+            transform: "translateZ(-30px) scale(0.95)",
+            height: sizeMap[size].height,
+            filter: "brightness(0.8)",
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+// Hero Component
 const Hero = () => {
   return (
-    <section id="home" className={`flex md:flex-row flex-col ${styles.paddingY} min-h-screen`}>
-      
+    <section
+      id="home"
+      className={`relative overflow-visible flex md:flex-row flex-col ${styles.paddingY} min-h-[90vh]`}
+    >
       {/* Left Content */}
-      <div className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6`}>
-        <div className="flex flex-row items-center py-3 px-4 bg-knowledge-gradient rounded-[16px] mb-4 shadow-lg">
-          <div className="flex">{/* Icons */}</div>
+      <div className="flex-1 flex flex-col justify-center px-6 sm:px-16 xl:px-0">
+        <div className="flex items-center py-3 px-4 bg-knowledge-gradient rounded-[16px] mb-4 shadow-lg">
           <p className={`${styles.paragraph} ml-3 font-medium`}>
             <span className="text-accent">AI-powered</span> study assistant for{" "}
             <span className="text-accent">smarter learning</span>
           </p>
         </div>
 
-        <div className="flex flex-row justify-between items-center w-full">
-          <h1 className="flex-1 font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100px] leading-[75px]">
-            Transform Your <br className="sm:block hidden" />
-            <span className="text-gradient">Study Sessions</span>
-          </h1>
-          <div className="ss:flex hidden md:mr-4 mr-0">
-            <GetStarted />
-          </div>
-        </div>
-
-        <h1 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[90px] leading-[75px] w-full">
-          With AI-Powered Insights.
+        <h1 className="font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100px] leading-[75px]">
+          Transform Your <br className="sm:block hidden" />
+          <span className="text-gradient">Study Sessions</span>
         </h1>
 
+        <h2 className="font-poppins font-semibold ss:text-[68px] text-[52px] text-white ss:leading-[90px] leading-[75px] w-full">
+          With AI-Powered Insights.
+        </h2>
+
         <p className={`${styles.paragraph} max-w-[550px] mt-5 text-lg`}>
-          Upload your course materials and get instant answers. Our AI analyzes all your 
-          sources - textbooks, notes, slides - to deliver comprehensive explanations with 
-          proper citations to original materials.
+          Upload your course materials and get instant answers. Our AI analyzes your
+          textbooks, notes, and slides to give comprehensive explanations with proper
+          citations.
         </p>
 
         <div className="flex flex-wrap gap-4 mt-8">
-          <button className="bg-accent hover:bg-accent-dark text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
+          <button className="bg-accent hover:bg-accent-dark border-white border-2 text-white font-medium py-3 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg">
             Try It Free
-          </button>
-          <button className="bg-transparent border-2 border-accent text-accent hover:bg-accent/10 font-medium py-3 px-6 rounded-xl transition-all duration-300">
-            See How It Works
           </button>
         </div>
       </div>
 
-      {/* Right 3D Model */}
-      <div className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative`}>
-       <Canvas
-  style={{
-    width: '100%',
-    height: '500px',
-    position: 'relative',
-    zIndex: 5
-  }}
-  camera ={{near: 0.1 , far: 1000}}
-  gl={{ antialias: true }}
->
-  <ambientLight intensity={0.8} />
-  <spotLight
-    position={[5, 5, 5]}
-    angle={0.3}
-    penumbra={1}
-    intensity={1}
-    castShadow
-  />
-  <Suspense fallback={null}>
-    <Center>
-      <Book3D/> {/* Slightly smaller */}
-    </Center>
-  </Suspense>
-  <OrbitControls
-    enableZoom={true}
-    autoRotate
-    autoRotateSpeed={1}
-    minDistance={7} // prevent getting too close
-    maxDistance={12}
-    minPolarAngle={Math.PI / 4}
-    maxPolarAngle={Math.PI / 1.8}
-    enablePan={false}
-  />
-</Canvas>
+      {/* Right Content - Books */}
+      <div
+        className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative min-h-[600px]`}
+      >
+        <div className="relative w-full h-full flex items-center justify-center">
+          {/* Left Book */}
+          <div className="absolute left-0 md:left-10 bottom-1/4 z-10 h-[300px]">
+            <ModernBookCover
+              size="sm"
+              color="neutral"
+              className="transform -rotate-6 hover:-rotate-12 h-full"
+            >
+              <BookHeader>
+                <BookIcon size={24} />
+              </BookHeader>
+              <BookTitle>TextBooks</BookTitle>
+              <BookDescription>
+                Key concepts, formulas, and solved problems
+              </BookDescription>
+            </ModernBookCover>
+          </div>
 
-        {/* Gradients */}
-        <div className="absolute z-[0] w-[40%] h-[35%] top-0 pink__gradient animate-pulse-slow" />
-        <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40 opacity-70" />
-        <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient animate-pulse-slow delay-1000" />
-      </div>
+          {/* Center Book */}
+          <div className="absolute z-20 transform -translate-y-10 h-[360px]">
+            <ModernBookCover
+              size="md"
+              color="amber"
+              className="hover:-rotate-12 h-full"
+            >
+              <BookHeader>
+                <BookIcon size={20} />
+              </BookHeader>
+              <BookTitle>Handwritten Notes</BookTitle>
+              <BookDescription>
+                Search within Your handwritten Notes
+              </BookDescription>
+            </ModernBookCover>
+          </div>
 
-      {/* Mobile GetStarted */}
-      <div className={`ss:hidden ${styles.flexCenter} mt-8`}>
-        <GetStarted />
+          {/* Right Book */}
+          <div className="absolute right-0 md:right-10 bottom-1/4 z-10 h-[420px]">
+            <ModernBookCover
+              size="lg"
+              color="blue"
+              className="transform rotate-6 hover:rotate-12 h-full"
+            >
+              <BookHeader>
+                <BookIcon size={20} />
+              </BookHeader>
+              <BookTitle>Interactive Q&A</BookTitle>
+              <BookDescription>
+                Ask questions directly from materials
+              </BookDescription>
+            </ModernBookCover>
+          </div>
+        </div>
       </div>
     </section>
   );

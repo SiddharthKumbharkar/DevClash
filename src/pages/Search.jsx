@@ -886,7 +886,7 @@ export default function AISearch() {
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       onKeyDown={handleKeyDown}
-                      placeholder="e.g. 'Show me the key points from the contract...'"
+                      placeholder="Show me the points from the contract."
                       className="w-full p-4 pl-12 pr-20 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-transparent transition-all duration-200"
                       disabled={isLoading}
                     />

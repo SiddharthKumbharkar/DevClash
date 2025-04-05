@@ -1,5 +1,6 @@
 import styles from "../style";
 import { Billing, Business, CardDeal, CTA, Footer, Navbar, Stats, Testimonials, Hero } from "../components";
+
 const Home = () => {
   return (
     <div className="bg-primary w-full overflow-hidden">
